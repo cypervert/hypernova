@@ -1,0 +1,40 @@
+
+version: '3.3'
+
+services:
+  web:
+    image: nginx:alpine
+    container_name: hypernova-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/hypernova
+      - ./.docker/nginx/hypernova.conf:/etc/nginx/conf.d/site.conf
+    links:
+      - php
+    restart: always
+    stdin_open: true
+    tty: true
+  
+  php:
+    container_name: hypernova-php-engine
+    build:
+      context: ./.docker/php
+    volumes:
+      - ./:/hypernova
+    depends_on:
+      - db
+  
+  db:
+    image: mariadb:10.3-bionic
+    container_name: hypernova-db
+    volumes:
+      - ./var/.database:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hypernova
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
