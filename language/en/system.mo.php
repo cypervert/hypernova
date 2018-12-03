@@ -244,11 +244,20 @@ $a_lang_array = (array(
     QUE_RESEARCH   => 'Research',
   ),
 
+  'navbar_button_expeditions_short' => 'Expedition',
+  'navbar_button_fleets' => 'Fleet',
+  'navbar_button_quests' => 'Quest',
+  'sys_que_structures' => 'Building',
+  'sys_que_hangar' => 'Shipyard',
+  'sys_que_research' => 'Research',
+  'sys_que_research_short' => 'Research',
+
   'eco_que'          => 'Queue',
   'eco_que_empty'    => 'Queue is empty',
   'eco_que_clear'    => 'Clear queue',
   'eco_que_trim'     => 'Undo last queue',
   'eco_que_artifact' => 'Use Artifact',
+
 
   'sys_overview'			=> 'Overview',
   'mod_marchand'			=> 'Trader',
@@ -1153,6 +1162,7 @@ $a_lang_array = (array(
   'wiki_grants' => 'Grants',
 
   'que_slot_length' => 'Slots',
+  'que_slot_length_long' => 'Slots',
 
   'sys_confirm_action_title' => 'Подтвердите ваше действие',
   'sys_confirm_action' => 'Вы действительно хотите сделать это?',
@@ -1208,5 +1218,7 @@ $a_lang_array = (array(
     19 => 'Marshal',
     20 => 'Generalissimo',
   ],
+
+  'font_normal' => 'Normal',
 
 ));

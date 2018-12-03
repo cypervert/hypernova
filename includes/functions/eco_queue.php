@@ -147,7 +147,7 @@ function que_build($user, $planet, $build_mode = BUILD_CREATE, $redirect = true)
       // case BUILD_REQUIRE_NOT_MEET:
       default:
         if($build_mode == BUILD_CREATE) {
-          throw new exception('{Требования не удовлетворены}', ERR_ERROR);
+          throw new exception('{BUILD_REQUIRE_NOT_MEET}', ERR_ERROR);
         }
         break; // TODO EXCEPTION eco_bld_msg_err_requirements_not_meet
     }
