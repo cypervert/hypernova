@@ -195,7 +195,7 @@ class sn_module {
     }
 
     // Registering classes with autoloader
-    \Core\Autoloader::register($this->getRootRelative() . 'classes/');
+    // \Core\Autoloader::register($this->getRootRelative() . 'classes/');
 
     // TODO - currently not possible because each module is not a service
     // When it's done - remove double registration from loadModulesFromDirectory()

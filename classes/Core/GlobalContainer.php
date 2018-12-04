@@ -13,6 +13,7 @@ use \Core\Watchdog;
 use \Core\Repository;
 use \Meta\Economic\EconomicHelper;
 use Player\PlayerLevelHelper;
+use DBAL\db_mysql;
 
 
 /**
@@ -92,7 +93,7 @@ class GlobalContainer extends ContainerPlus {
     // Services --------------------------------------------------------------------------------------------------------
     // Default db
     $gc->db = function (GlobalContainer $c) {
-      SN::$db = new \DBAL\db_mysql($c);
+      SN::$db = new db_mysql($c);
 
       return SN::$db;
     };

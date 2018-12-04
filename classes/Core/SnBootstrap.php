@@ -89,7 +89,6 @@ class SnBootstrap {
       @define('BE_DEBUG', false);
       @ini_set('display_errors', 0);
     }
-
   }
 
   /**

@@ -195,6 +195,7 @@ class db_mysql {
 //      }
 //    }
 
+
     if ($config->debug) {
       $numqueries++;
       $arr = debug_backtrace();

@@ -10,14 +10,30 @@ if(defined('INIT')) {
 
 define('INIT', true);
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$nova = \HyperNova\Engine::engine();
+
+try {
+  $nova->acquireEnvironmentKnowledges([
+    'dir' => __DIR__,
+    'php_vers' => PHP_VERSION
+  ]);
+} catch (\Exception $e) {
+  die($e->getMessage());
+}
+
+$nova->autoload('classes/');
+
+// Installing autoloader
+define('SN_ROOT_PHYSICAL', $nova->get(\HyperNova\Engine::SN_ROOT_PHYSICAL));
+
 // Замеряем начальные параметры
 define('SN_TIME_MICRO', microtime(true));
 define('SN_MEM_START', memory_get_usage());
-define('SN_ROOT_PHYSICAL', str_replace('\\', '/', realpath(dirname(__DIR__))) . '/');
+
 define('SN_ROOT_PHYSICAL_STR_LEN', strlen(SN_ROOT_PHYSICAL));
 define('SN_ROOT_MODULES', SN_ROOT_PHYSICAL . 'modules/');
-
-version_compare(PHP_VERSION, '5.6') < 0 ? die('FATAL ERROR: SuperNova REQUIRE PHP version >= 5.6') : false;
 
 //define('DEBUG_UBE', true);
 //define('DEBUG_FLYING_FLEETS', true);
@@ -32,20 +48,19 @@ header('Content-type: text/html; charset=utf-8');
 ob_start();
 ini_set('error_reporting', E_ALL ^ E_NOTICE);
 
-// Installing autoloader
-require_once SN_ROOT_PHYSICAL . 'classes/Core/Autoloader.php';
-\Core\Autoloader::register('classes/');
-\Core\Autoloader::register('classes/UBE/');
-
-
-require_once SN_ROOT_PHYSICAL . 'includes/constants/constants.php';
+$nova->requireOnce([
+  'includes/constants/constants.php'
+]);
 
 // Бенчмарк
 SnBootstrap::install_benchmark();
 // Loading functions - can't be inserted into function
-require_once SN_ROOT_PHYSICAL . 'includes/db.php';
-require_once(SN_ROOT_PHYSICAL . 'includes/general/general.php');
-require_once(SN_ROOT_PHYSICAL . 'includes/template.php');
+$nova->requireOnce([
+  'includes/db.php',
+  'includes/general/general.php',
+  'includes/template.php'
+]);
+
 sn_sys_load_php_files(SN_ROOT_PHYSICAL . 'includes/functions/', PHP_EX);
 
 SN::loadFileSettings();

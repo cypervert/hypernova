@@ -2,6 +2,9 @@
 config.php
 *config.php
 
+# Ignore vendor
+/vendor/
+
 # Ignore forums
 /phpBB3/
 /forum/
